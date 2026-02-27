@@ -5,7 +5,7 @@ def detect_outliers(df, column):
     stats = df.select(mean(column).alias("mean"), stddev(column).alias("std")).collect()[0]
     mean_val, std_val = stats["mean"], stats["std"]
     return df.withColumn(f"{column}_is_outlier",
-                        (col(column) > (mean_val + 3 * std_val)) | (col(column) < (mean_val - 3 * std_val)))
+                        (col(column) > (mean_val + 3 * std_val)) | (col(column) < (mean_val - 3 * std_val))) 
 
 def clean_data(df, name):
     """Clean DataFrame by removing nulls and duplicates."""
