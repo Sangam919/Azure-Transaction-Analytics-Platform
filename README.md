@@ -6,7 +6,7 @@
 [![Delta Lake](https://img.shields.io/badge/Delta%20Lake-2.4.0+-green.svg)](https://delta.io/)
 [![Azure](https://img.shields.io/badge/Azure-Data%20Lake%20Gen2-blue.svg)](https://azure.microsoft.com/en-us/services/storage/data-lake-storage/)
 
-A powerful data engineering pipeline for analyzing multi-channel transaction data (web, mobile, in-store) using Azure Databricks, Delta Lake, and Azure Data Lake Storage Gen2. This project was developed as part of a Data Engineering Internship at **Celebal Technologies**, tackling real-world big data challenges and delivering actionable business insights.
+A powerful data engineering pipeline for analyzing multi-channel transaction data (web, mobile, in-store) using Azure Databricks, Delta Lake, and Azure Data Lake Storage Gen2. This project was developed as part of a Data Engineering Internship at **Celebal Technologies**, tackling real-world big data challenges and delivering actionable business insights. 
 
 ## 🌟 Project Overview
 
