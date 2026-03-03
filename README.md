@@ -6,268 +6,225 @@
 [![Delta Lake](https://img.shields.io/badge/Delta%20Lake-2.4.0+-green.svg)](https://delta.io/)
 [![Azure](https://img.shields.io/badge/Azure-Data%20Lake%20Gen2-blue.svg)](https://azure.microsoft.com/en-us/services/storage/data-lake-storage/)
 
-A powerful data engineering pipeline for analyzing multi-channel transaction data (web, mobile, in-store) using Azure Databricks, Delta Lake, and Azure Data Lake Storage Gen2. This project was developed as part of a Data Engineering Internship at **Celebal Technologies**, tackling real-world big data challenges and delivering actionable business insights. 
+A production-grade data engineering pipeline for analyzing multi-channel transaction data (web, mobile, in-store) using **Azure Databricks**, **Delta Lake**, and **Azure Data Lake Storage Gen2**. Developed as a capstone project during a Data Engineering Internship at **Celebal Technologies**.
+
+---
 
 ## 🌟 Project Overview
 
-This platform was designed to address complex data engineering challenges in multi-channel retail analytics. Built during my internship at Celebal Technologies, this solution demonstrates enterprise-grade data processing capabilities using modern cloud technologies. The pipeline processes large-scale transaction data, delivering actionable insights for businesses through scalable Apache Spark and Delta Lake architecture.
+This platform solves real-world data engineering challenges in multi-channel retail analytics. The pipeline ingests raw transaction data from multiple channels, applies enterprise-grade data quality checks, and delivers actionable business insights using scalable Apache Spark and Delta Lake architecture on Azure cloud.
 
-## ✨ Key Features
-
-* **Multi-Channel Analytics**: Combines web, mobile, and in-store data seamlessly
-* **Actionable Business Insights**: Tracks customer spending patterns, top-performing products, and marketing campaign ROI
-* **Enterprise Data Quality**: Advanced validation with missing value detection and outlier analysis
-* **Scalable Cloud Processing**: Leverages Spark's distributed computing for big data workloads
-* **Delta Lake Integration**: ACID transactions, time travel, and optimized storage performance
-* **Production-Ready Code**: Modular, maintainable Python architecture with comprehensive error handling
-* **Real-time Analytics**: Fast query performance for business intelligence dashboards
+---
 
 ## 🏗️ Solution Architecture
 
 ```
-┌──────────────┐    ┌──────────────┐    ┌─────────────────┐    ┌──────────────┐
-│ Data Sources │───▶│ ADLS Gen2    │───▶│ Azure Databricks │───▶│ Delta Tables │
-│ • Web        │    │ • Raw CSV    │    │ • Data Pipeline │    │ • Analytics  │
-│ • Mobile     │    │ • Staging    │    │ • ML Processing │    │ • Insights   │
-│ • In-Store   │    │ • Archive    │    │ • Quality Checks│    │ • Reports    │
-└──────────────┘    └──────────────┘    └─────────────────┘    └──────────────┘
+┌──────────────┐    ┌──────────────┐    ┌──────────────────────┐    ┌──────────────┐
+│ Data Sources │───▶│  ADLS Gen2   │───▶│   Azure Databricks   │───▶│ Delta Tables │
+│ • Web        │    │ • Raw CSV    │    │ • Data Ingestion     │    │ • Analytics  │
+│ • Mobile     │    │ • Staging    │    │ • Data Cleaning      │    │ • Insights   │
+│ • In-Store   │    │ • Archive    │    │ • Analytics Engine   │    │ • Reports    │
+└──────────────┘    └──────────────┘    └──────────────────────┘    └──────────────┘
 ```
 
-## 📋 Prerequisites
+**Data Flow:**
+1. Raw CSVs land in ADLS Gen2
+2. `data_loader.py` ingests and schemas the data
+3. `data_cleaner.py` validates quality and removes anomalies
+4. `analytics.py` computes business KPIs
+5. `delta_utils.py` persists results as Delta tables
+6. `pipeline.py` orchestrates the full end-to-end run
 
-### Azure Cloud Environment:
-* Azure Data Lake Storage Gen2 account
-* Azure Databricks premium workspace
-* Proper IAM roles and permissions
+---
 
-### Databricks Cluster Configuration:
-* Apache Spark 3.4+ with Scala 2.12
-* Delta Lake 2.4.0 (io.delta:delta-core_2.12:2.4.0)
-* Python 3.8+ runtime
-* Optimized cluster sizing for workload
+## ✨ Key Features
 
-### Data Lake Setup:
-* Configured secret scope: `azure-storage` with `storage-access-key`
-* Structured data directory: `transactions/*.csv` and `products.csv`
-* Proper data governance and access controls
+- **Multi-Channel Ingestion** — Unified processing of web, mobile, and in-store transaction data
+- **Enterprise Data Quality** — Null detection, outlier analysis, referential integrity validation
+- **Delta Lake Integration** — ACID transactions, time travel, and optimized Parquet storage
+- **Business Intelligence Engine** — Customer LTV, product performance, campaign ROI analytics
+- **Modular Architecture** — Clean separation of concerns across ingestion, cleaning, analytics layers
+- **Scalable Spark Processing** — Distributed computing for large-scale transaction volumes
+- **Production-Ready Code** — Comprehensive error handling, logging, and configurable parameters
 
-## 🚀 Quick Start Guide
+---
 
-### 1. Repository Setup
+## 📁 Project Structure
+
+```
+Azure-Transaction-Analytics-Platform/
+├── src/
+│   ├── config.py           # Azure storage & Spark configuration
+│   ├── data_loader.py      # Data ingestion from ADLS Gen2
+│   ├── data_cleaner.py     # Data quality & validation logic
+│   ├── analytics.py        # Business KPI computation engine
+│   ├── delta_utils.py      # Delta Lake read/write/upsert operations
+│   └── pipeline.py         # End-to-end orchestration
+├── notebooks/              # Exploratory analysis & output screenshots
+├── Images/                 # Architecture and output visuals
+├── requirements.txt        # Python dependencies
+├── .gitignore
+└── README.md
+```
+
+---
+
+## 📊 Data Schema
+
+### Transaction Data (`transactions/*.csv`)
+
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| transaction_id | String | NOT NULL, UNIQUE | Unique transaction identifier |
+| customer_id | String | NOT NULL | Customer identifier |
+| product_id | String | NOT NULL, FK | Links to product catalog |
+| quantity | Integer | > 0 | Units purchased |
+| price | Double | > 0.0 | Unit price (USD) |
+| transaction_date | Timestamp | NOT NULL | Transaction timestamp (UTC) |
+| campaign_id | String | NULLABLE | Marketing campaign reference |
+
+### Product Catalog (`products.csv`)
+
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| product_id | String | PK, NOT NULL | Unique product identifier |
+| description | String | NOT NULL | Product description |
+| category | String | NOT NULL | Product category |
+| unit_price | Double | > 0.0 | Standard price (USD) |
+
+---
+
+## 📈 Analytics Capabilities
+
+### Customer Intelligence
+- Average order value, purchase frequency, customer lifetime value (LTV)
+- Revenue segmentation and behavioral pattern analysis
+- Statistical outlier detection for anomaly/fraud flagging
+
+### Product Performance
+- Top products by revenue and transaction volume
+- Category-level cross comparison
+- Demand trend analysis for inventory planning
+
+### Marketing Campaign ROI
+- Revenue attribution per campaign
+- Customer acquisition cost tracking
+- Multi-channel conversion analysis
+
+### Data Quality Assurance
+- Completeness checks (null/missing value reports)
+- Referential integrity validation (transaction ↔ product joins)
+- Statistical outlier scoring and correction
+- Quality scorecards stored as Delta tables
+
+---
+
+## 🔧 Setup & Configuration
+
+### Prerequisites
+
+- Azure Data Lake Storage Gen2 account
+- Azure Databricks Premium workspace
+- Apache Spark 3.4+ with Scala 2.12
+- Delta Lake 2.4.0
+- Python 3.8+
+
+### 1. Clone Repository
 
 ```bash
-git clone https://github.com/Sangam919/Final-Project-Pyspark-problem-statement-.git
-cd azure-transaction-analytics
+git clone https://github.com/Sangam919/Azure-Transaction-Analytics-Platform.git
+cd Azure-Transaction-Analytics-Platform
 ```
 
-### 2. Azure Authentication
-
-Configure Databricks secret scope for secure ADLS access:
+### 2. Configure Azure Credentials
 
 ```bash
 databricks secrets create-scope --scope azure-storage
 databricks secrets put --scope azure-storage --key storage-access-key
 ```
 
-Update `src/config.py` with your Azure storage account details (default: mydatalake2004, transaction-data).
+Update `src/config.py` with your storage account name and container.
 
-### 3. Data Preparation
-
-Ensure your ADLS Gen2 container follows this structure:
+### 3. ADLS Data Structure
 
 ```
 /transaction-data/
 ├── transactions/
 │   ├── transaction_1.csv
 │   ├── transaction_2.csv
-│   ├── transaction_3.csv
 │   └── ...
 ├── products.csv
 └── archive/
 ```
 
-### 4. Pipeline Deployment
-
-1. Import repository to Databricks using Repos feature
-2. Create and configure your cluster (see Configuration section)
-3. Execute the complete pipeline:
+### 4. Run the Pipeline
 
 ```python
-%run /Repos/<your-username>/azure-transaction-analytics/src/pipeline.py
+# In Databricks notebook
+%run /Repos/<your-username>/Azure-Transaction-Analytics-Platform/src/pipeline.py
 ```
 
-## 📊 Comprehensive Data Schema
+---
 
-### Transaction Data (transactions/*.csv)
-
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| transaction_id | String | NOT NULL, UNIQUE | Unique transaction identifier |
-| customer_id | String | NOT NULL | Customer identifier for analytics |
-| product_id | String | NOT NULL, FK | Links to products table |
-| quantity | Integer | > 0 | Number of units purchased |
-| price | Double | > 0.0 | Unit price in USD |
-| transaction_date | Timestamp | NOT NULL | Transaction timestamp (UTC) |
-| campaign_id | String | NULLABLE | Marketing campaign reference |
-
-### Product Catalog (products.csv)
-
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| product_id | String | NOT NULL, UNIQUE, PK | Unique product identifier |
-| description | String | NOT NULL | Detailed product description |
-| category | String | NOT NULL | Product category classification |
-| unit_price | Double | > 0.0 | Standard unit price in USD |
-
-## 🔧 Advanced Configuration
-
-### Production Databricks Cluster
+## 🖥️ Databricks Cluster Configuration
 
 ```json
 {
-  "cluster_name": "celebal-analytics-cluster",
+  "cluster_name": "transaction-analytics-cluster",
   "spark_version": "14.3.x-scala2.12",
   "node_type_id": "Standard_DS3_v2",
-  "num_workers": 4,
-  "autoscale": {
-    "min_workers": 2,
-    "max_workers": 8
-  },
+  "autoscale": { "min_workers": 2, "max_workers": 8 },
   "spark_conf": {
     "spark.jars.packages": "io.delta:delta-core_2.12:2.4.0",
     "spark.sql.extensions": "io.delta.sql.DeltaSparkSessionExtension",
-    "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog",
-    "spark.databricks.delta.preview.enabled": "true"
-  },
-  "init_scripts": []
+    "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+  }
 }
 ```
 
-### Enterprise Project Structure
+---
 
-```
-azure-transaction-analytics/
-├── src/                          # Core application code
-│   ├── __init__.py              # Package initialization
-│   ├── config.py                # Azure connection configuration
-│   ├── data_loader.py           # Data ingestion module
-│   ├── data_cleaner.py          # Data quality and validation
-│   ├── analytics.py             # Business intelligence engine
-│   ├── delta_utils.py           # Delta Lake operations
-│   └── pipeline.py              # Main orchestration pipeline
-├── tests/                       # Unit and integration tests
-├── docs/                        # Technical documentation
-├── notebooks/                   # Exploration and analysis
-├── README.md                    # Project documentation
-├── requirements.txt             # Python dependencies
-├── .gitignore                   # Version control exclusions
-└── LICENSE                      # MIT license
-```
-
-## 📈 Advanced Analytics Capabilities
-
-### Customer Intelligence:
-* **Behavioral Analytics**: Average order value, purchase frequency, customer lifetime value
-* **Revenue Analytics**: Total revenue tracking, transaction volume analysis
-* **Anomaly Detection**: Statistical outlier identification for fraud detection
-* **Segmentation**: Customer clustering based on spending patterns
-
-### Product Performance:
-* **Sales Analytics**: Top-performing products by volume and revenue
-* **Category Intelligence**: Cross-category performance comparison
-* **Inventory Insights**: Product demand forecasting support
-* **Pricing Analytics**: Price elasticity and optimization insights
-
-### Marketing Campaign ROI:
-* **Campaign Performance**: Revenue attribution, customer acquisition cost
-* **Channel Analytics**: Multi-channel conversion tracking
-* **Customer Journey**: Campaign touchpoint analysis
-* **Performance Benchmarking**: Campaign comparison and optimization
-
-### Data Quality Assurance:
-* **Completeness Checks**: Comprehensive null value analysis
-* **Consistency Validation**: Cross-table referential integrity
-* **Accuracy Metrics**: Statistical outlier detection and correction
-* **Reliability Reports**: Data quality scorecards and trending
-
-## 🏃‍♂️ Production Deployment
-
-### Pipeline Execution
-
-Execute in Databricks production environment:
-
-```python
-# Main pipeline execution
-%run /Repos/<your-repo>/src/pipeline.py
-
-# Verify data quality
-%sql
-SELECT * FROM analytics_db.data_quality_summary 
-ORDER BY check_timestamp DESC LIMIT 10;
-
-# Review analytics results
-%sql
-SELECT * FROM analytics_db.customer_analytics 
-WHERE total_revenue > 1000 
-ORDER BY total_revenue DESC;
-```
-
-### Performance Monitoring
+## 🔍 Sample Queries
 
 ```sql
--- Campaign performance dashboard
-SELECT 
-  campaign_id,
-  total_revenue,
-  total_transactions,
-  unique_customers,
-  avg_revenue_per_customer
+-- Top customers by revenue
+SELECT customer_id, total_revenue, total_transactions
+FROM analytics_db.customer_analytics
+WHERE total_revenue > 1000
+ORDER BY total_revenue DESC;
+
+-- Campaign performance
+SELECT campaign_id, total_revenue, unique_customers, avg_revenue_per_customer
 FROM analytics_db.campaign_analytics
 ORDER BY total_revenue DESC;
 
--- Data quality monitoring
-SELECT 
-  table_name,
-  quality_score,
-  issues_detected,
-  last_updated
-FROM analytics_db.data_quality_summary;
+-- Data quality check
+SELECT table_name, quality_score, issues_detected, last_updated
+FROM analytics_db.data_quality_summary
+ORDER BY check_timestamp DESC LIMIT 10;
 ```
 
-## 🛠️ Future Enhancement Roadmap
+---
 
-### Phase 1 - Advanced Analytics:
-* **Machine Learning Integration**: Predictive analytics for customer churn and lifetime value
-* **Real-time Streaming**: Apache Kafka integration for live transaction processing
-* **Advanced Segmentation**: RFM analysis and behavioral clustering algorithms
+## 🛠️ Future Roadmap
 
-### Phase 2 - Operational Excellence:
-* **MLOps Pipeline**: Automated model training and deployment workflows
-* **Data Governance**: Comprehensive data lineage and catalog integration
-* **Performance Optimization**: Query optimization and cost management strategies
+- **Real-time Streaming** — Apache Kafka integration for live transaction processing
+- **RFM Segmentation** — Recency, Frequency, Monetary customer clustering
+- **Data Governance** — Lineage tracking and Unity Catalog integration
+- **Power BI Integration** — Live dashboard connectivity
+- **Automated Scheduling** — Databricks Workflows for daily pipeline runs
 
-### Phase 3 - Enterprise Features:
-* **Multi-tenant Architecture**: Support for multiple business units
-* **Advanced Visualization**: Integration with Power BI and Tableau
-* **Automated Reporting**: Scheduled insights delivery and alerting systems
+---
 
 ## 🙌 Acknowledgments
 
-I would like to express my heartfelt gratitude to **Celebal Technologies** for providing me with this incredible opportunity to work on cutting-edge data engineering challenges during my internship. This project represents the culmination of intensive learning and hands-on experience with enterprise-grade cloud technologies.
-
-**Special thanks to:**
-- The Celebal Technologies Data Engineering team for their mentorship and guidance
-- My project supervisors for their continuous support and technical insights
-- The company's commitment to fostering innovation and professional growth in emerging technologies
-
-This internship experience at Celebal Technologies has been instrumental in developing my expertise in Azure cloud technologies, big data processing, and enterprise data architecture patterns.
+Developed during a **Data Engineering Internship at Celebal Technologies**. Special thanks to the Data Engineering team for mentorship and guidance on enterprise-grade Azure cloud architecture.
 
 **Project Details:**
-- **Intern**: Sangam Srivastav
-- **Company**: Celebal Technologies
-- **Program**: Data Engineering Internship
-- **Tech Stack**: Apache Spark, Delta Lake, Azure Databricks, Python
-- **Focus Areas**: Big Data Processing, Cloud Analytics, Data Quality Engineering
+- **Developer:** Sangam Srivastav
+- **Internship:** Celebal Technologies — Data Engineering
+- **Tech Stack:** Python · PySpark · Azure Databricks · ADLS Gen2 · Delta Lake · SQL
 
+---
 
-*Developed with ❤️ during Data Engineering Internship at Celebal Technologies*
+*Built with ❤️ during Data Engineering Internship at Celebal Technologies*
