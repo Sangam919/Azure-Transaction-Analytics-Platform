@@ -8,10 +8,24 @@
 [![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.3+-f7931e?logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
 [![Plotly](https://img.shields.io/badge/Plotly-5.18+-3f4f75)](https://plotly.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Streamlit%20Cloud-ff4b4b?logo=streamlit&logoColor=white)](https://tinyurl.com/ycyv7xd8)
 
 A **production-grade Data Engineering + AI/ML + GenAI platform** for multi-channel retail transaction analytics. Built with **Azure Databricks**, **Delta Lake**, **PySpark**, and an interactive **Streamlit dashboard** featuring machine learning models and an agentic AI query engine.
 
 > **Developer:** Sangam Srivastav · **Internship:** Celebal Technologies — Data Engineering
+
+---
+
+## 🚀 Live Demo
+
+> **Try the app live — no setup required!**
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://tinyurl.com/ycyv7xd8)
+
+👉 **[https://tinyurl.com/ycyv7xd8](https://tinyurl.com/ycyv7xd8)**
+
+The live demo runs on **Streamlit Community Cloud** with synthetic data pre-loaded.
+Explore all 7 pages — KPI Dashboard, Customer Segmentation, AI/ML Insights, AI Agent chat, and more — directly in your browser.
 
 ---
 
