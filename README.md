@@ -1,51 +1,98 @@
-# 🚀 Azure Transaction Analytics Platform
+# ⚡ Azure Transaction Analytics Platform
 
+[![Python](https://img.shields.io/badge/Python-3.8+-3776ab?logo=python&logoColor=white)](https://python.org)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-ff4b4b?logo=streamlit&logoColor=white)](https://streamlit.io)
+[![PySpark](https://img.shields.io/badge/Apache%20Spark-3.4+-e25a1c?logo=apache-spark&logoColor=white)](https://spark.apache.org)
+[![Delta Lake](https://img.shields.io/badge/Delta%20Lake-2.4+-00ADD8)](https://delta.io)
+[![Azure](https://img.shields.io/badge/Azure-ADLS%20Gen2-0078d4?logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com)
+[![Scikit-learn](https://img.shields.io/badge/Scikit--learn-1.3+-f7931e?logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
+[![Plotly](https://img.shields.io/badge/Plotly-5.18+-3f4f75)](https://plotly.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Apache Spark](https://img.shields.io/badge/Apache%20Spark-3.4+-orange.svg)](https://spark.apache.org/)
-[![Delta Lake](https://img.shields.io/badge/Delta%20Lake-2.4.0+-green.svg)](https://delta.io/)
-[![Azure](https://img.shields.io/badge/Azure-Data%20Lake%20Gen2-blue.svg)](https://azure.microsoft.com/en-us/services/storage/data-lake-storage/)
 
-A production-grade data engineering pipeline for analyzing multi-channel transaction data (web, mobile, in-store) using **Azure Databricks**, **Delta Lake**, and **Azure Data Lake Storage Gen2**. Developed as a capstone project during a Data Engineering Internship at **Celebal Technologies**.
+A **production-grade Data Engineering + AI/ML + GenAI platform** for multi-channel retail transaction analytics. Built with **Azure Databricks**, **Delta Lake**, **PySpark**, and an interactive **Streamlit dashboard** featuring machine learning models and an agentic AI query engine.
+
+> **Developer:** Sangam Srivastav · **Internship:** Celebal Technologies — Data Engineering
 
 ---
 
-## 🌟 Project Overview
+## 🌟 What This Project Demonstrates
 
-This platform solves real-world data engineering challenges in multi-channel retail analytics. The pipeline ingests raw transaction data from multiple channels, applies enterprise-grade data quality checks, and delivers actionable business insights using scalable Apache Spark and Delta Lake architecture on Azure cloud.
+| Domain | Skills Showcased |
+|--------|-----------------|
+| **Data Engineering** | ETL Pipelines, PySpark, Azure Databricks, ADLS Gen2, Delta Lake, Schema Enforcement, Data Quality |
+| **AI / Machine Learning** | K-Means (RFM), Isolation Forest, Linear Regression Forecasting, Content-Based Recommendations |
+| **Generative AI** | AI-powered narrative insights, automated trend summaries, actionable recommendations |
+| **Agentic AI** | Natural language query agent (13 intent types), autonomous data exploration, context-aware responses |
+| **Data Applications** | Streamlit multi-page dashboard, Plotly interactive charts, responsive dark-themed UI |
+| **Cloud Architecture** | Azure ADLS Gen2, Databricks Secret Scopes, Delta Lake ACID transactions, ZORDER optimization |
 
 ---
 
 ## 🏗️ Solution Architecture
 
 ```
-┌──────────────┐    ┌──────────────┐    ┌──────────────────────┐    ┌──────────────┐
-│ Data Sources │───▶│  ADLS Gen2   │───▶│   Azure Databricks   │───▶│ Delta Tables │
-│ • Web        │    │ • Raw CSV    │    │ • Data Ingestion     │    │ • Analytics  │
-│ • Mobile     │    │ • Staging    │    │ • Data Cleaning      │    │ • Insights   │
-│ • In-Store   │    │ • Archive    │    │ • Analytics Engine   │    │ • Reports    │
-└──────────────┘    └──────────────┘    └──────────────────────┘    └──────────────┘
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                          FULL-STACK ARCHITECTURE                             │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│   ┌──────────────┐    ┌──────────────┐    ┌──────────────────────┐          │
+│   │ Data Sources │───▶│  ADLS Gen2   │───▶│   Azure Databricks   │          │
+│   │ • Web        │    │ • Raw CSV    │    │ • Data Ingestion     │          │
+│   │ • Mobile     │    │ • Staging    │    │ • Data Cleaning      │          │
+│   │ • In-Store   │    │ • Archive    │    │ • Analytics Engine   │          │
+│   └──────────────┘    └──────────────┘    └──────────┬───────────┘          │
+│                                                       │                      │
+│                                                       ▼                      │
+│                                           ┌──────────────────────┐          │
+│                                           │    Delta Lake Tables  │          │
+│                                           │ • customer_analytics  │          │
+│                                           │ • product_analytics   │          │
+│                                           │ • campaign_analytics  │          │
+│                                           │ • data_quality        │          │
+│                                           └──────────────────────┘          │
+│                                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│                       STREAMLIT DASHBOARD (Local Demo)                       │
+│                                                                              │
+│   ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌───────────────────┐    │
+│   │ 📊 Overview  │ │ 👥 Customers│ │ 📦 Products │ │  📣 Campaigns     │    │
+│   │  KPI Cards  │ │  RFM Segs  │ │ Cat Analysis│ │  ROI Dashboard    │    │
+│   └─────────────┘ └─────────────┘ └─────────────┘ └───────────────────┘    │
+│   ┌─────────────┐ ┌─────────────────────────────┐ ┌───────────────────┐    │
+│   │ 🛡️ Quality  │ │  🤖 AI/ML Insights           │ │  💬 AI Agent      │    │
+│   │  Null/Dup   │ │  Forecast · Cluster · Anomaly│ │  NLP Chat Agent   │    │
+│   └─────────────┘ └─────────────────────────────┘ └───────────────────┘    │
+└──────────────────────────────────────────────────────────────────────────────┘
 ```
-
-**Data Flow:**
-1. Raw CSVs land in ADLS Gen2
-2. `data_loader.py` ingests and schemas the data
-3. `data_cleaner.py` validates quality and removes anomalies
-4. `analytics.py` computes business KPIs
-5. `delta_utils.py` persists results as Delta tables
-6. `pipeline.py` orchestrates the full end-to-end run
 
 ---
 
 ## ✨ Key Features
 
-- **Multi-Channel Ingestion** — Unified processing of web, mobile, and in-store transaction data
-- **Enterprise Data Quality** — Null detection, outlier analysis, referential integrity validation
-- **Delta Lake Integration** — ACID transactions, time travel, and optimized Parquet storage
-- **Business Intelligence Engine** — Customer LTV, product performance, campaign ROI analytics
-- **Modular Architecture** — Clean separation of concerns across ingestion, cleaning, analytics layers
-- **Scalable Spark Processing** — Distributed computing for large-scale transaction volumes
-- **Production-Ready Code** — Comprehensive error handling, logging, and configurable parameters
+### 🔧 Data Engineering Pipeline
+- **Multi-Channel Ingestion** — Unified processing of Web, Mobile, In-Store transactions
+- **Schema Enforcement** — Strict PySpark StructType schemas to prevent type errors at scale
+- **Data Quality Engine** — Null detection, deduplication, outlier analysis, referential integrity
+- **Delta Lake Integration** — ACID transactions, time travel, ZORDER optimization, VACUUM
+- **Modular Architecture** — Clean separation: `config → loader → cleaner → analytics → delta`
+
+### 🤖 AI / Machine Learning
+- **Revenue Forecasting** — Linear Regression on monthly aggregates with 95% confidence intervals
+- **Customer Segmentation** — K-Means clustering on RFM (Recency, Frequency, Monetary) features
+- **Anomaly Detection** — Isolation Forest model to flag suspicious/fraudulent transactions
+- **Product Recommendations** — Content-based filtering using cosine similarity on product features
+- **Elbow Method** — Automated optimal k selection visualization
+
+### 🧠 Generative AI & Agentic AI
+- **AI Analytics Agent** — Natural language query engine with 13 intent types
+- **Automated Insights** — AI-generated narrative summaries of trends, anomalies, and opportunities
+- **Pluggable LLM Interface** — Ready for OpenAI / Azure OpenAI upgrade with one config change
+
+### 📊 Interactive Dashboard (Streamlit)
+- **7 full pages** with dark-themed glassmorphism design
+- **Plotly interactive charts** — bar, line, pie, scatter, histogram, gauge, treemap
+- **Real-time filters** — search, category filter, forecast period sliders
+- **AI Chat Interface** — session-persistent chat with suggestion shortcuts
 
 ---
 
@@ -53,81 +100,76 @@ This platform solves real-world data engineering challenges in multi-channel ret
 
 ```
 Azure-Transaction-Analytics-Platform/
-├── src/
-│   ├── config.py           # Azure storage & Spark configuration
-│   ├── data_loader.py      # Data ingestion from ADLS Gen2
-│   ├── data_cleaner.py     # Data quality & validation logic
-│   ├── analytics.py        # Business KPI computation engine
-│   ├── delta_utils.py      # Delta Lake read/write/upsert operations
-│   └── pipeline.py         # End-to-end orchestration
-├── notebooks/              # Exploratory analysis & output screenshots
-├── Images/                 # Architecture and output visuals
-├── requirements.txt        # Python dependencies
-├── .gitignore
-└── README.md
+│
+├── app.py                          # Streamlit entry point + global CSS
+├── data_generator.py               # Synthetic data generator (demo mode)
+├── analytics_engine.py             # Pandas-based analytics (mirrors PySpark)
+├── ml_engine.py                    # AI/ML models (K-Means, IsoForest, LR, Cosine Sim)
+├── ai_agent.py                     # Agentic AI / NLP query engine
+├── requirements.txt                # Python dependencies
+│
+├── pages/                          # Streamlit multi-page app
+│   ├── 1_📊_Dashboard.py          # KPI overview, revenue trend, channel split
+│   ├── 2_👥_Customers.py          # Customer LTV, RFM segmentation
+│   ├── 3_📦_Products.py           # Product & category analytics
+│   ├── 4_📣_Campaigns.py          # Campaign ROI dashboard
+│   ├── 5_🛡️_Data_Quality.py      # Quality scores, null/outlier analysis
+│   ├── 6_🤖_AI_ML_Insights.py    # Forecast, Segmentation, Anomaly, Recs
+│   └── 7_💬_AI_Agent.py          # NLP chat interface
+│
+├── .streamlit/
+│   └── config.toml                 # Dark theme configuration
+│
+├── src/                            # Azure Databricks / PySpark modules
+│   ├── config.py                   # ADLS Gen2 connection + secret scope
+│   ├── data_loader.py              # Schema-enforced CSV ingestion
+│   ├── data_cleaner.py             # Null removal, deduplication, outlier detection
+│   ├── analytics.py                # Business KPI computation engine
+│   ├── visualizations.py           # Matplotlib charts (Databricks)
+│   ├── delta_utils.py              # Delta Lake read/write/optimize operations
+│   ├── pipeline.py                 # End-to-end orchestration
+│   └── ml_models.py                # PySpark MLlib ML models (NEW)
+│
+├── notebook/
+│   └── Azure_Transaction_Analytics.ipynb  # Full pipeline notebook
+│
+└── Image/                          # Architecture and output screenshots
 ```
 
 ---
 
 ## 📊 Data Schema
 
-### Transaction Data (`transactions/*.csv`)
+### Transactions (`transactions/*.csv`)
 
 | Column | Type | Constraints | Description |
 |--------|------|-------------|-------------|
-| transaction_id | String | NOT NULL, UNIQUE | Unique transaction identifier |
-| customer_id | String | NOT NULL | Customer identifier |
-| product_id | String | NOT NULL, FK | Links to product catalog |
-| quantity | Integer | > 0 | Units purchased |
-| price | Double | > 0.0 | Unit price (USD) |
-| transaction_date | Timestamp | NOT NULL | Transaction timestamp (UTC) |
-| campaign_id | String | NULLABLE | Marketing campaign reference |
+| `transaction_id` | String | NOT NULL, UNIQUE | Prefix: WEB\_, MOB\_, STR\_ |
+| `customer_id` | String | NOT NULL | Customer reference |
+| `product_id` | String | FK | Links to product catalog |
+| `quantity` | Integer | > 0 | Units purchased |
+| `price` | Double | > 0.0 | Unit price (USD) |
+| `transaction_date` | Timestamp | NOT NULL | UTC timestamp |
+| `campaign_id` | String | NULLABLE | Marketing campaign |
 
-### Product Catalog (`products.csv`)
+### Products (`products.csv`)
 
-| Column | Type | Constraints | Description |
-|--------|------|-------------|-------------|
-| product_id | String | PK, NOT NULL | Unique product identifier |
-| description | String | NOT NULL | Product description |
-| category | String | NOT NULL | Product category |
-| unit_price | Double | > 0.0 | Standard price (USD) |
-
----
-
-## 📈 Analytics Capabilities
-
-### Customer Intelligence
-- Average order value, purchase frequency, customer lifetime value (LTV)
-- Revenue segmentation and behavioral pattern analysis
-- Statistical outlier detection for anomaly/fraud flagging
-
-### Product Performance
-- Top products by revenue and transaction volume
-- Category-level cross comparison
-- Demand trend analysis for inventory planning
-
-### Marketing Campaign ROI
-- Revenue attribution per campaign
-- Customer acquisition cost tracking
-- Multi-channel conversion analysis
-
-### Data Quality Assurance
-- Completeness checks (null/missing value reports)
-- Referential integrity validation (transaction ↔ product joins)
-- Statistical outlier scoring and correction
-- Quality scorecards stored as Delta tables
+| Column | Type | Description |
+|--------|------|-------------|
+| `product_id` | String | PK, unique identifier |
+| `description` | String | Product name |
+| `category` | String | Electronics, Clothing, Home & Kitchen, etc. |
+| `unit_price` | Double | Standard price (USD) |
 
 ---
 
-## 🔧 Setup & Configuration
+## 🚀 Quick Start — Streamlit Dashboard
 
 ### Prerequisites
 
-- Azure Data Lake Storage Gen2 account
-- Azure Databricks Premium workspace
-- Apache Spark 3.4+ with Scala 2.12
-- Delta Lake 2.4.0
-- Python 3.8+
+```bash
+Python 3.8+
+```
 
 ### 1. Clone Repository
 
@@ -136,37 +178,56 @@ git clone https://github.com/Sangam919/Azure-Transaction-Analytics-Platform.git
 cd Azure-Transaction-Analytics-Platform
 ```
 
-### 2. Configure Azure Credentials
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the Dashboard
+
+```bash
+streamlit run app.py
+```
+
+The dashboard opens at **http://localhost:8501** 🎉
+
+---
+
+## ☁️ Azure Databricks Pipeline Setup
+
+### Prerequisites
+
+- Azure Data Lake Storage Gen2 account
+- Azure Databricks Premium workspace
+- Apache Spark 3.4+ with Delta Lake 2.4
+
+### 1. Configure Credentials
 
 ```bash
 databricks secrets create-scope --scope azure-storage
 databricks secrets put --scope azure-storage --key storage-access-key
 ```
 
-Update `src/config.py` with your storage account name and container.
-
-### 3. ADLS Data Structure
+### 2. Upload Data
 
 ```
 /transaction-data/
 ├── transactions/
 │   ├── transaction_1.csv
-│   ├── transaction_2.csv
-│   └── ...
+│   └── transaction_2.csv
 ├── products.csv
 └── archive/
 ```
 
-### 4. Run the Pipeline
+### 3. Run Pipeline
 
 ```python
 # In Databricks notebook
-%run /Repos/<your-username>/Azure-Transaction-Analytics-Platform/src/pipeline.py
+%run /Repos/<username>/Azure-Transaction-Analytics-Platform/src/pipeline.py
 ```
 
----
-
-## 🖥️ Databricks Cluster Configuration
+### 4. Databricks Cluster Config
 
 ```json
 {
@@ -184,7 +245,43 @@ Update `src/config.py` with your storage account name and container.
 
 ---
 
-## 🔍 Sample Queries
+## 📈 Analytics Capabilities
+
+### Customer Intelligence
+- Lifetime Value (LTV), avg order value, purchase frequency
+- RFM segmentation: Champions, Loyal, Potential Loyalists, At-Risk
+- Revenue outlier detection using 3-sigma rule
+
+### Product Performance
+- Top products by revenue and transaction volume
+- Cross-category comparison with treemap visualizations
+- Content-based product recommendation engine
+
+### Marketing Campaign ROI
+- Revenue attribution per campaign
+- Unique customer reach and avg revenue per customer
+- Multi-channel conversion analysis
+
+### AI/ML Models
+| Model | Purpose | Library |
+|-------|---------|---------|
+| Linear Regression | Revenue forecasting + 95% CI | scikit-learn |
+| K-Means (k=4) | RFM customer segmentation | scikit-learn |
+| Isolation Forest | Transaction anomaly detection | scikit-learn |
+| Cosine Similarity | Product recommendations | scikit-learn |
+| PySpark KMeans | Scalable segmentation on Databricks | MLlib |
+
+### Agentic AI Query Engine
+```
+User: "Top 5 customers by revenue"      → Customer leaderboard response
+User: "Show campaign performance"        → Campaign ROI breakdown
+User: "How many anomalies detected?"     → Anomaly detection summary
+User: "What is the data quality score?"  → Quality report
+```
+
+---
+
+## 🔍 Sample SQL Queries (Delta Lake)
 
 ```sql
 -- Top customers by revenue
@@ -194,37 +291,38 @@ WHERE total_revenue > 1000
 ORDER BY total_revenue DESC;
 
 -- Campaign performance
-SELECT campaign_id, total_revenue, unique_customers, avg_revenue_per_customer
+SELECT campaign_id, campaign_revenue, unique_customers, avg_revenue_per_customer
 FROM analytics_db.campaign_analytics
-ORDER BY total_revenue DESC;
+ORDER BY campaign_revenue DESC;
 
--- Data quality check
-SELECT table_name, quality_score, issues_detected, last_updated
-FROM analytics_db.data_quality_summary
-ORDER BY check_timestamp DESC LIMIT 10;
+-- Anomalous transactions
+SELECT transaction_id, customer_id, price, quantity
+FROM analytics_db.transactions_insights
+WHERE price_is_outlier = true OR quantity_is_outlier = true;
+
+-- Data quality summary
+SELECT * FROM analytics_db.data_quality_summary;
 ```
 
 ---
 
 ## 🛠️ Future Roadmap
 
-- **Real-time Streaming** — Apache Kafka integration for live transaction processing
-- **RFM Segmentation** — Recency, Frequency, Monetary customer clustering
-- **Data Governance** — Lineage tracking and Unity Catalog integration
-- **Power BI Integration** — Live dashboard connectivity
-- **Automated Scheduling** — Databricks Workflows for daily pipeline runs
+- **Real-time Streaming** — Apache Kafka + Spark Structured Streaming integration
+- **LLM Integration** — OpenAI / Azure OpenAI upgrade for the AI Agent
+- **Unity Catalog** — Data governance and lineage tracking
+- **Power BI** — Live Delta Lake connector for BI dashboards
+- **Databricks Workflows** — Automated daily pipeline scheduling
+- **Docker** — Containerized deployment for the Streamlit app
+- **dbt** — Transformation layer for the analytics models
 
 ---
 
 ## 🙌 Acknowledgments
 
-Developed during a **Data Engineering Internship at Celebal Technologies**. Special thanks to the Data Engineering team for mentorship and guidance on enterprise-grade Azure cloud architecture.
-
-**Project Details:**
-- **Developer:** Sangam Srivastav
-- **Internship:** Celebal Technologies — Data Engineering
-- **Tech Stack:** Python · PySpark · Azure Databricks · ADLS Gen2 · Delta Lake · SQL
+Developed as a capstone project during a **Data Engineering Internship at Celebal Technologies**.
+Special thanks to the Data Engineering mentorship team for guidance on enterprise Azure architecture.
 
 ---
 
-*Built with ❤️ during Data Engineering Internship at Celebal Technologies*
+*Built with ❤️ by **Sangam Srivastav** during Data Engineering Internship at Celebal Technologies*
