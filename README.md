@@ -1,6 +1,4 @@
 # ⚡ Azure Transaction Analytics Platform
-# App Link - https://sangam919-azure-transaction-analytics-platform-app-i47uti.streamlit.app/
-# <img width="1917" height="927" alt="image" src="https://github.com/user-attachments/assets/666fb94a-993c-40de-954d-fd8362f978db" />
 
 [![Python](https://img.shields.io/badge/Python-3.8+-3776ab?logo=python&logoColor=white)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-ff4b4b?logo=streamlit&logoColor=white)](https://streamlit.io)
