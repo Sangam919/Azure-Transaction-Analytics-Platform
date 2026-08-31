@@ -23,6 +23,8 @@ A **production-grade Data Engineering + AI/ML + GenAI platform** for multi-chann
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://tinyurl.com/ycyv7xd8)
 
 👉 **[https://tinyurl.com/ycyv7xd8](https://tinyurl.com/ycyv7xd8)**
+<img width="1917" height="927" alt="image" src="https://github.com/user-attachments/assets/69c72bdb-0708-427f-92fb-d2c0ee76ee20" />
+
 
 The live demo runs on **Streamlit Community Cloud** with synthetic data pre-loaded.
 Explore all 7 pages — KPI Dashboard, Customer Segmentation, AI/ML Insights, AI Agent chat, and more — directly in your browser.
